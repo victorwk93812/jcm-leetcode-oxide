@@ -1,0 +1,20 @@
+[package]
+name = "leetcode"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+
+[lints.rust]
+# Solutions are only exercised by their own tests, so `Solution` impls are
+# "unused" from the library's point of view. Silence that noise.
+dead_code = "allow"
+
+[lints.clippy]
+# LeetCode signatures force some non-idiomatic shapes (e.g. `Vec<i32>` by value,
+# `i32` where `usize` would be natural). Keep clippy useful without fighting it.
+needless_range_loop = "allow"
