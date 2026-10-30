@@ -1,29 +1,27 @@
-//! # 1. Two Sum
+//! # 1. New Sum Revisited
 //!
-//! <https://leetcode.com/problems/two-sum/>
+//! <https://leetcode.com/problems/new-sum-revisited/>
 //!
-//! Difficulty: Easy
-//! Tags: array, hash-table
+//! Difficulty:
+//! Tags:
 //!
-//! Given an array of integers `nums` and an integer `target`, return indices
-//! of the two numbers such that they add up to `target`. Exactly one solution
-//! exists and an element may not be used twice.
+//! (problem statement summary)
+pub struct Solution;
 
 use std::collections::HashMap;
 
-pub struct Solution;
-
 impl Solution {
-    /// O(n) time, O(n) space: single pass with a value -> index map.
     pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut seen: HashMap<i32, i32> = HashMap::with_capacity(nums.len());
-        for (i, &n) in nums.iter().enumerate() {
-            if let Some(&j) = seen.get(&(target - n)) {
+        for (i, &num) in nums.iter().enumerate() {
+            if let Some(&j) = seen.get(&(target - num)) {
                 return vec![j, i as i32];
+            } else {
+                // as since enumerate returns usize
+                seen.insert(num, i as i32);
             }
-            seen.insert(n, i as i32);
         }
-        unreachable!("problem guarantees exactly one solution")
+        unreachable!("problem guarantees solution unity");
     }
 }
 

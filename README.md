@@ -39,9 +39,27 @@ cargo fmt
 Linked-list and tree problems can import the shared types:
 
 ```rust
-use crate::common::{ListNode, TreeNode};
-use crate::tree;
+use crate::common::{ListExt, ListNode, TreeNode};
+use crate::{list, tree};
 
-let list = ListNode::from_slice(&[1, 2, 3]);
+let head = list![1, 2, 3];
+let sum: i32 = head.values().sum();             // borrowing iterator, yields &i32
+let doubled: Vec<i32> = head.into_values().map(|v| v * 2).collect(); // owning
+assert_eq!(list![4, 5].to_vec(), [4, 5]);        // shorthand for assertions
+
 let root = tree![3, 9, 20, None, None, 15, 7];
 ```
+
+## Study notes
+
+`docs/` holds longer-form notes. Their code blocks are compiled and run as
+doctests through `src/study.rs`, so they cannot go stale:
+
+```sh
+cargo test --doc
+```
+
+- `docs/vec_and_hashmap.md` — `Vec` and `HashMap` memory model, method cheat
+  sheets, idioms, and worked LeetCode situations.
+- `docs/input_output.md` — reading stdin and writing stdout coming from C++:
+  the three reading patterns, a token scanner, fast output, and helper crates.
